@@ -1,0 +1,142 @@
+.container {
+    display: flex;
+    gap: 20px;
+    margin: 20px;
+  }
+  
+  // Left Section 
+  .left-section {
+    flex: 2;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    scrollbar-width: none;
+    height: 450px;
+  }
+  .left-section-two {
+    flex: 2;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    scrollbar-width: none;
+    height: 400px;
+  }
+  .progress-item {
+    margin-bottom: 20px;
+  }
+  
+  .progress-title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .progress-bar-container {
+    width: 100%;
+    height: 7px;
+    background-color: #EDF2F9;
+    // border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    background-color: #3182CE;
+    transition: width 0.3s ease;
+  }
+  
+  .file-details {
+    font-size: 14px;
+    color: gray;
+    margin-top: 5px;
+  }
+  
+  // Right Section
+  
+  .right-section {
+    flex: 1;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .doughnut-chart {
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    // background: conic-gradient(
+    //   #3182CE 0% 50%, /* Automatic Conversion */
+    //   #63B3ED 50% 100% /* Manual Conversion */
+    // );
+    position: relative;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  
+  .inner-circle {
+    width: 150px;
+    height: 150px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .conversion-details {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+  }
+  
+  .conversion-details li {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .dot.automatic {
+    background-color: #3182CE;
+  }
+  
+  .dot.manual {
+    background-color: #ffbd59;
+  }
+  
+  h2{
+    color: #3182CE;
+    font-size: 16px;
+  }
+.container {
+  position: relative;
+}
+
+mat-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}

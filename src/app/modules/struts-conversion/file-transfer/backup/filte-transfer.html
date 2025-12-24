@@ -1,0 +1,94 @@
+<div class="container flex justify-between items-center mt-8 space-x-4">
+    <!-- Old Section -->
+    <div class="section w-1/2 h-[400px] p-4 shadow-lg rounded-lg bg-white overflow-hidden border border-gray-300">
+        <h3 class="text-xl font-semibold mb-4">Legacy Code Structure</h3>
+        <mat-tree [dataSource]="oldTreeDataSource" [treeControl]="treeControl" class="tree">
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+                <div class="mat-tree-node" style="display: flex; align-items: center; padding: 5px 0;margin-left:24px ;" [ngClass]="{'mat-file': node.type === 'file', 'mat-folder': node.type === 'folder'}">
+                    <mat-icon class="mat-icon" *ngIf="node.type === 'folder'">folder</mat-icon>
+                    <mat-icon class="mat-icon" *ngIf="node.type === 'file'">insert_drive_file</mat-icon>
+                    <!-- <span class="tree-column" style="flex: 3;"></span> -->
+                    <mat-checkbox (change)="toggleSelection(node)" [checked]="isNodeSelected(node)">
+                        {{ (node.name).length>30?((node.name).substring(0,30) + '...'):node.name }}
+                    </mat-checkbox>
+                </div>
+            </mat-tree-node>
+
+            <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+
+                <div class="mat-tree-node" style="display: flex; align-items: center; padding: 5px 0;" [ngClass]="{'mat-file': node.type === 'file', 'mat-folder': node.type === 'folder'}">
+
+                    <mat-icon matTreeNodeToggle class="tree-icon">
+                        {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+                    </mat-icon>
+                    <mat-icon class="mat-icon" *ngIf="node.type === 'folder'">folder</mat-icon>
+                    <mat-icon class="mat-icon" *ngIf="node.type === 'file'">insert_drive_file</mat-icon>
+                    <mat-checkbox (change)="toggleSelection(node)" [checked]="isNodeSelected(node)">
+                        {{ (node.name).length>30?((node.name).substring(0,30) + '...'):node.name }}
+                    </mat-checkbox>                
+                </div>
+            </mat-tree-node>
+        </mat-tree>
+    </div>
+
+    <!-- Action Section (Move Buttons) -->
+    <div class="action flex flex-col items-center justify-center space-y-4">
+        <!-- Move All Files Forward -->
+        <mat-icon
+                class="action-box border border-gray-300 shadow-md p-2 rounded-sm flex items-center justify-center w-12 h-12 transition-all duration-200"
+                [ngClass]="{
+            'text-blue-500 bg-white cursor-pointer': canMove,
+            'text-gray-400 bg-gray-200 cursor-not-allowed': !canMove
+        }"   (click)="moveFiles()"
+        >keyboard_arrow_right</mat-icon
+        >
+
+        <!-- Move All Files Backward -->
+        <mat-icon
+                class="action-box border border-gray-300 shadow-md p-2 rounded-sm flex items-center justify-center w-12 h-12 transition-all duration-200"
+               (click)="moveFilesBack()"
+        >delete</mat-icon
+        >
+    </div>
+
+
+
+
+    <!-- New Section -->
+    <div class="section w-1/2 h-[400px] p-4 shadow-lg rounded-lg bg-white overflow-hidden border border-gray-300">
+        <h3 class="text-xl font-semibold mb-4">Standardized Code Structure</h3>
+        <mat-tree [dataSource]="newTreeDataSource" [treeControl]="standardTreeControl" class="tree">
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+              
+
+                <div class="mat-tree-node" style="display: flex; align-items: center; padding: 5px 0;margin-left:24px ;" [ngClass]="{'mat-file': node.type === 'file', 'mat-folder': node.type === 'folder'}">
+                    <mat-icon class="mat-icon" *ngIf="node.type === 'folder'">folder</mat-icon>
+                    <mat-icon class="mat-icon" *ngIf="node.type === 'file'">insert_drive_file</mat-icon>
+                    <mat-checkbox  (change)="selectNewTreeFolder(node)"
+                    [checked]="isNewTreeFolderSelected && selectedNewFolder?.path === node.path">
+                    {{ node.name }}
+                 </mat-checkbox>
+                </div>
+
+            </mat-tree-node>
+
+            <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+
+                <div class="mat-tree-node" style="display: flex; align-items: center; padding: 5px 0;" [ngClass]="{'mat-file': node.type === 'file', 'mat-folder': node.type === 'folder'}">
+
+                    <mat-icon matTreeNodeToggle class="tree-icon">
+                        {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+                    </mat-icon>
+                    <mat-icon class="mat-icon" *ngIf="node.type === 'folder'">folder</mat-icon>
+                    <mat-icon class="mat-icon" *ngIf="node.type === 'file'">insert_drive_file</mat-icon>
+                    <mat-checkbox *ngIf="node.type === 'folder'" (change)="selectNewTreeFolder(node)"
+                    [checked]="isNewTreeFolderSelected && selectedNewFolder?.path === node.path">
+                    {{ (node.name).length>30?((node.name).substring(0,30) + '...'):node.name }}
+                     </mat-checkbox>
+                 
+                </div>
+              
+            </mat-tree-node>
+        </mat-tree>
+    </div>
+</div>

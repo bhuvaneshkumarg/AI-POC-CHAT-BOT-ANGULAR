@@ -1,0 +1,99 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 325px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.tree-table {
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+//.mat-tree-node {
+//  font-size: 12px;
+//}
+
+.tree-column {
+  padding: 3px 7px;
+  font-size: 12px;
+}
+
+// .mat-icon {
+//   margin-right: 8px;
+// }
+
+.mat-folder .mat-icon {
+  color: #f6d32d;
+}
+
+.mat-file .mat-icon {
+  color: #81a1c1;
+}
+
+.mat-tree-node:hover {
+  background-color: #f9fafb;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.table-header{
+  font-size: 12px ;
+}
+
+//[matTreeNodePadding] {
+//  padding-left: calc(5px * var(--mat-tree-node-level));
+//}
+
+.path-column {
+  padding-left: 0 !important; /* Remove padding for path column */
+}
+::ng-deep {
+
+   .mat-tree-node {
+     max-height: 25px !important; // Restricting max height to 20px
+     min-height: 25px !important; // Ensure the height does not shrink below 20px
+     overflow: hidden; // Hide any overflowing content
+     display: flex;
+     align-items: center;
+    //  padding: 0 8px;
+   }
+
+   .mat-tree-node .tree-column {
+     padding: 3px 7px;
+     font-size: 10px;
+   }
+
+   .mat-tree-node:hover {
+     background-color: #f9fafb;
+     border-radius: 4px;
+     cursor: pointer;
+   }
+
+  //  .mat-icon {
+  //    margin-right: 8px;
+  //  }
+
+   .mat-folder .mat-icon {
+     color: #f6d32d;
+   }
+
+   .mat-file .mat-icon {
+     color: #81a1c1;
+   }
+
+   .path-column {
+     padding-left: 0 !important; /* Remove padding for path column */
+   }
+ }
+
+
+.file-content-popup{
+  width: 600px !important;
+  max-width: 600px !important;
+  height: 400px !important;
+  overflow-y: auto; 
+  white-space: pre-wrap;
+}

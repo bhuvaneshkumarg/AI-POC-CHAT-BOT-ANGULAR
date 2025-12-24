@@ -1,0 +1,243 @@
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 80vh;
+  width: 100%;
+}
+
+.chat-window {
+  width: 100%;
+  height: calc(112% - 100px); 
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 10px 0;
+}
+
+.message {
+  width: 100%;
+  margin: 5px 0;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  font-size: 15px;
+}
+
+.user-message {
+  background-color: #e0f7fa;
+  text-align: left;
+  color: #0b5394;
+  font-weight: bold;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+
+}
+
+.bot-message {
+  text-align: left;
+  color: #2e7d32; 
+  font-weight: bold;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+
+}
+
+.error-message {
+  color: red;
+  background-color: #ffe6e6;
+  border: 1px solid red;
+}
+
+.message.error-message {
+  color: red !important; 
+  background-color: #ffe6e6 !important;
+  border: 1px solid red !important; 
+}
+
+
+
+.chat-input-container {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-top: 1px solid #ccc;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chat-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: none;
+  outline: none;
+  resize: none;
+  transition: border-color 0.3s ease;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.chat-input:focus {
+  border-color: #4fb7e0;
+}
+
+.send-icon {
+  margin-left: 8px;
+  background-color: #4caf50;
+  border-radius: 50%;
+  padding: 10px;
+  color: white;
+}
+
+.send-icon mat-icon {
+  font-size: 24px;
+}
+
+.message-image img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.clickable-image {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, max-width 0.3s ease;
+  display: block;
+}
+
+.message-image {
+  width: 100%;
+  overflow-x: auto;
+  text-align: left;
+
+  img {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+
+
+.image-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  position: relative;
+  max-width: 80%;
+  max-height: 80%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.zoom-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+
+  button {
+    padding: 6px 12px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #388e3c;
+    }
+
+    &:disabled {
+      background-color: #a5d6a7;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.popup-image {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+  transform-origin: center center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 10000;
+}
+
+.close-btn:hover {
+  color: red;
+}
+
+.disclaimer {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: #d9cece;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
+}
+
+.flashing-text {
+  animation: flash 1.5s 1;
+}
+
+@keyframes flash {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
+}

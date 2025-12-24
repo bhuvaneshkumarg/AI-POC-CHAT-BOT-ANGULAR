@@ -1,0 +1,94 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+.mat-dialog-container {
+    padding: 0 !important;
+}
+
+// .mat-step-icon-content {
+//     transform: translate(-40%, -50%) !important;
+// }
+
+.mat-step-header.mat-step-done .mat-step-icon {
+    background-color: #4caf50 !important;
+    color: white !important;
+}
+
+.mat-step-header:hover:not([aria-disabled]) {
+    background-color: transparent !important;
+}
+
+.mat-step-header{
+    cursor: default !important;
+}
+
+.body.light .mat-step-header .mat-step-icon-selected{
+    background-color: var(--fuse-primary);
+    color: var(--fuse-on-primary);
+}
+
+::ng-deep .mat-step-header .mat-step-completed .mat-step-icon-selected {
+    background-color: green !important;
+    color: var(--fuse-on-primary);
+}
+
+.mat-step-header .mat-step-icon-state-done{
+    background-color: green !important;
+    color: var(--fuse-on-primary);
+}
+  
+// body, html {
+//     overflow-y: hidden; /* Disables vertical scroll */
+//   }
+ 
+
+.toast-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid transparent;
+  }
+  
+  .toast-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .toast-message {
+    flex: 1;
+  }
+  
+  .toast-error .mat-icon { color: #f44336; }
+  .toast-warning .mat-icon { color: #ff9800; }
+  .toast-info .mat-icon { color: #2196f3; }
+  .toast-success .mat-icon { color: #1b5e20; }
+
+  .toast-success {
+        background-color: #e6f4ea !important;
+        color: #1b5e20 !important;
+        border-color: #1b5e20 !important;
+    }
+
+    .toast-error {
+        background-color: #ffebee !important;
+        color: #c62828 !important;
+        border-color: #c62828 !important; 
+      }
+      .toast-warning {
+        background-color: #fff8e1 !important;
+        color: #f57c00 !important;
+        border-color: #f57c00 !important;
+      }
+      .toast-info {
+        background-color: #e3f2fd !important;
+        color: #1565c0 !important; 
+        border-color: #1565c0 !important;
+      }
+  
+  

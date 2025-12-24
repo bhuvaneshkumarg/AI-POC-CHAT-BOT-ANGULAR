@@ -1,0 +1,21 @@
+<mat-dialog-content class="dialog-container" [ngClass]="{ 'dark-mode': isDarkMode }">
+    <div class="dialog-header">
+      <h2 class="file-title">{{ data.fileName }}</h2>
+      <div class="actions">
+        <button mat-icon-button (click)="copyToClipboard()" matTooltip="Copy">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+        <button mat-icon-button (click)="toggleDarkMode()" matTooltip="Toggle Dark Mode">
+          <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        </button>
+        <button mat-icon-button (click)="closeDialog()" matTooltip="Close">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="file-content">
+      <pre>{{ data.content }}</pre>
+    </div>
+  </mat-dialog-content>
+  
+  

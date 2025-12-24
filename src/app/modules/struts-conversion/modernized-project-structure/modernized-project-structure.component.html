@@ -1,0 +1,149 @@
+
+<div style="display: flex; align-items: center;justify-content: flex-end;">
+    <img style="width: 20px; height: 20px; cursor: pointer;" src="assets/icons/download.png"
+      (click)="downloadPdf()">&nbsp;
+    <p style="color: #3182CE; cursor: pointer;" (click)="downloadPdf()">Download Report</p>
+  </div>
+<br>
+<div class="container">
+    <div class="tree-container">
+        <div class="chart-container">
+            <h3 class="tree-title">Spring Boot</h3>
+            <div class="doughnut-chart" [ngStyle]="backendDoughnutStyle">
+              <div class="inner-circle"></div>
+            </div>
+            <ul class="conversion-details">
+              <li><span class="dot automatic"></span> Automatic Conversion - {{ backendConversionPercentage?.automatic }}%
+              </li>
+              <li><span class="dot manual"></span> Manual Conversion - {{backendConversionPercentage?.manual}}%</li>
+            </ul>
+          </div>
+    </div>
+    <div class="tree-container">
+        <div class="chart-container">
+            <h3 class="tree-title">Angular</h3>
+            <div class="doughnut-chart" [ngStyle]="frontendDougnutStyle">
+              <div class="inner-circle"></div>
+            </div>
+            <ul class="conversion-details">
+              <li><span class="dot automatic"></span> Automatic Conversion - {{ frontendConversionPercentage?.automatic }}%
+              </li>
+              <li><span class="dot manual"></span> Manual Conversion - {{frontendConversionPercentage?.manual}}%</li>
+            </ul>
+          </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <!-- Spring Boot Tree -->
+    <div class="tree-container">
+        <div class="tree-table">
+            <div class="align-row">
+                <h3 class="tree-title">Spring Boot</h3>
+                <a class="sb-link-style" matTooltip="{{sbDestinationUrl}}" [href]="sbDestinationUrl" target="_blank">
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'feather:github'">
+                    </mat-icon>  
+                    Click Here
+                </a>
+            </div>
+            <div class="tree-content">
+                <mat-tree [dataSource]="sbDataSource" [treeControl]="sbTreeControl">
+                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding matTreeNodePaddingIndent="20" matTreeNodeToggle (click)="onFileClick(node)">
+                        <div class="mat-tree-node" [ngClass]="{'mat-file': node.type === 'file', 'mat-folder': node.type === 'folder'}">
+                            <mat-icon *ngIf="node.type === 'folder'">folder</mat-icon>
+                            <mat-icon *ngIf="node.type === 'file'">insert_drive_file</mat-icon>
+                            <span class="tree-column">{{ node.name }}</span>
+                        </div>
+                    </mat-tree-node>
+
+                    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding matTreeNodePaddingIndent="20" matTreeNodeToggle>
+                        <div class="mat-tree-node" [ngClass]="{'mat-file': node.type === 'file', 'mat-folder': node.type === 'folder'}">
+                            <mat-icon *ngIf="sbTreeControl.isExpanded(node)">expand_more</mat-icon>
+                            <mat-icon *ngIf="!sbTreeControl.isExpanded(node)">chevron_right</mat-icon>
+                            <mat-icon *ngIf="node.type === 'folder'">folder</mat-icon>
+                            <mat-icon *ngIf="node.type === 'file'">insert_drive_file</mat-icon>
+                            <span class="tree-column">{{ node.name }}</span>
+                        </div>
+                    </mat-tree-node>
+                </mat-tree>
+            </div>
+        </div>
+    </div>
+
+    <!-- Angular Tree -->
+    <div class="tree-container">
+        <div class="tree-table">
+            <div class="align-row">
+                <h3 class="tree-title">Angular</h3>
+                <a class="ang-link-style" matTooltip="{{ngDestinationUrl}}" [href]="ngDestinationUrl" target="_blank">
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'feather:github'">
+                    </mat-icon> 
+                    Click Here
+                </a>   
+            </div>
+            <div class="tree-content">
+                <mat-tree [dataSource]="ngDataSource" [treeControl]="ngTreeControl">
+                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding matTreeNodePaddingIndent="20" matTreeNodeToggle (click)="onFileClick(node)">
+                        <div class="mat-tree-node" [ngClass]="{'mat-file': node.type === 'file', 'mat-folder': node.type === 'folder'}">
+                            <mat-icon *ngIf="node.type === 'folder'">folder</mat-icon>
+                            <mat-icon *ngIf="node.type === 'file'">insert_drive_file</mat-icon>
+                            <span class="tree-column">{{ node.name }}</span>
+                        </div>
+                    </mat-tree-node>
+
+                    <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding matTreeNodePaddingIndent="20" matTreeNodeToggle>
+                        <div class="mat-tree-node" [ngClass]="{'mat-file': node.type === 'file', 'mat-folder': node.type === 'folder'}">
+                            <mat-icon *ngIf="ngTreeControl.isExpanded(node)">expand_more</mat-icon>
+                            <mat-icon *ngIf="!ngTreeControl.isExpanded(node)">chevron_right</mat-icon>
+                            <mat-icon *ngIf="node.type === 'folder'">folder</mat-icon>
+                            <mat-icon *ngIf="node.type === 'file'">insert_drive_file</mat-icon>
+                            <span class="tree-column">{{ node.name }}</span>
+                        </div>
+                    </mat-tree-node>
+                </mat-tree>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="report-content">
+    <h3 class="tree-title">Manual Changes Report</h3>
+    <!-- <mat-card class="mat-card"> -->
+        <mat-table [dataSource]="dataSource" class="mat-table mat-elevation-z8" style="table-layout: fixed;">
+          <!-- Project Column -->
+          <ng-container matColumnDef="project">
+            <mat-header-cell *matHeaderCellDef class="small-column"> Project </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="small-column">
+              {{ element.project }}
+            </mat-cell>
+          </ng-container>
+      
+     
+      
+          <!-- Manual Changes Column -->
+          <ng-container matColumnDef="manualChanges">
+            <mat-header-cell *matHeaderCellDef> Manual Changes </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="manual-changes-column">
+              <ul>
+                <!-- Loop through each manual change and display the details as bullet points -->
+                <li *ngFor="let change of element.manualChanges">
+                  <b>{{ change.title }}</b>
+                  <ul>
+                    <li *ngFor="let detail of change.details">{{ detail }}</li>
+                  </ul>
+                </li>
+              </ul>
+            </mat-cell>
+          </ng-container>
+      
+          <!-- Table Header and Rows -->
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      <!-- </mat-card> -->
+</div>

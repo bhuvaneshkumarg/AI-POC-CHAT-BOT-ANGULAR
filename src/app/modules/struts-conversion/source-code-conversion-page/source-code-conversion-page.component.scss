@@ -1,0 +1,346 @@
+.content {
+    padding: 30px;
+    background: #f5f5f5;
+}
+
+.flex-content {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px !important;
+}
+
+.flex-content-two {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px !important;
+    color: #738192 !important;
+}
+
+mat-expansion-panel-header {
+    flex-direction: row-reverse !important;
+    align-items: flex-start !important;
+    height: auto !important;
+    padding: 12px !important;
+    /* Reverses the order of elements */
+}
+
+mat-expansion-panel-header .mat-expansion-panel-header-title {
+    order: 2 !important;
+    /* Moves the title back to the normal order */
+    flex: 1;
+    /* Take up the remaining space */
+    margin-left: 5px !important;
+}
+
+mat-expansion-panel-header .mat-expansion-toggle-indicator {
+    order: 1 !important;
+    /* Moves the indicator to the left */
+    margin-right: 15px !important;
+    /* Adds spacing between the indicator and title */
+}
+
+mat-expansion-panel-header .loading-icon {
+    order: 3;
+}
+
+.loading-icon {
+    width: 2%;
+    height: 2%;
+}
+
+.loading-icon-two {
+    width: 6%;
+    height: 6%;
+}
+
+mat-expansion-panel-header .header-content {
+    display: grid;
+    grid-template-rows: auto auto;
+    /* Two rows: auto height */
+    width: 100%;
+    /* Take up full header width */
+    align-items: center;
+}
+
+mat-expansion-panel-header .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+::ng-deep .mat-expansion-indicator {
+    margin-top: 5px !important;
+}
+
+mat-expansion-panel-header .header-row-2 {
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Flex container */
+.row-container {
+    display: flex;
+    align-items: center;
+    /* Vertically align all items */
+    width: 100%;
+    /* Ensure the row takes the full width */
+    margin-bottom: 10px;
+    padding-left: 20px !important;
+}
+
+.row-container-two {
+    display: flex;
+    align-items: center;
+    /* Vertically align all items */
+    width: 100%;
+    /* Ensure the row takes the full width */
+    margin: 10px 0px;
+    padding-left: 20px !important;
+}
+
+/* Left content (25% width) */
+.left-content {
+    flex: 0 0 35%;
+    /* Fixed 25% width */
+    text-align: left;
+    font-size: 12px !important;
+    /* Optional: Align content to the left */
+}
+
+/* Center content (50% width) */
+.center-content {
+    flex: 0 0 40%;
+    /* Fixed 50% width */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px !important;
+    /* Spacing between progress bar and percentage */
+}
+
+/* Right content (25% width) */
+.right-content {
+    flex: 0 0 25%;
+    /* Fixed 25% width */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* Align content to the right */
+    gap: 8px;
+    font-size: 12px !important;
+    /* Spacing between text and image */
+}
+
+/* Progress bar styling */
+.center-content mat-progress-bar {
+    flex: 1;
+    /* Ensure the progress bar stretches within the center content */
+}
+
+mat-chip {
+    border-radius: 20px !important;
+    padding: 5px 10px !important;
+}
+
+.card-padding {
+    padding: 12px !important;
+}
+
+.heading-font {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}
+
+.example-headers-align {
+    margin: 10px !important;
+}
+
+.mb-15 {
+    margin-bottom: 15px !important;
+}
+
+.mrf-10 {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+
+// ::ng-deep body.light .mat-progress-bar-fill::after,
+// body .light .mat-progress-bar-fill::after {
+//     background-color: #3182CE !important;
+// }
+
+
+.accordion {
+    border-right: 1px solid #CCE5F6;
+    border-top: 1px solid #CCE5F6;
+    border-bottom: 1px solid #CCE5F6;
+    box-shadow: 0px 3px 6px #0000001A;
+    border-radius: 15px;
+    opacity: 1;
+    border-left: 10px solid #3182CE !important;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #ddd;
+}
+
+.accordion-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px !important;
+}
+
+
+.indicator {
+    font-size: 18px;
+}
+
+.accordion-body {
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+}
+
+.disable-div {
+    pointer-events: none !important;
+    opacity: 0.5 !important;
+}
+
+.git-link {
+    font-size: 12px;
+    color: #3182CE;
+    text-decoration: underline;
+}
+
+.github-link-style {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.completion-icon-style {
+    display: flex !important;
+    justify-content: center !important;
+    width: 2%;
+    height: 2%;
+    margin: 0 auto;
+}
+
+.completion-text {
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.title-text {
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+
+.link-style {
+    text-decoration: underline !important;
+    color: #3182CE !important;
+}
+
+.small-column {
+
+    width: 100px;
+    /* Set a fixed width */
+
+    max-width: 200px;
+    /* Ensure it doesn't expand beyond this width */
+
+    overflow: hidden;
+    /* Hide overflowing content */
+
+    text-overflow: ellipsis;
+    /* Add "..." for truncated text */
+
+    white-space: nowrap;
+    /* Prevent text wrapping */
+
+}
+
+
+.small-column {
+
+    flex: 0 0 200px;
+    /* Prevent the column from shrinking or growing */
+
+}
+
+
+
+::ng-deep .manual-changes-column {
+    width: 500px !important;
+}
+
+
+//   .mat-table {
+//     width: 100%;
+//   }
+
+.manual-changes-column ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.manual-changes-column ul ul {
+    list-style-type: circle;
+}
+
+.mat-input-element:disabled {
+    color: #040404 !important;
+    font-size: 14px !important;
+    font-weight: 600;
+}
+
+.mat-input-element:disabled:hover {
+    cursor: not-allowed;
+}
+
+body.light .mat-progress-bar-fill::after,
+body .light .mat-progress-bar-fill::after {
+    background-color: #3182CE !important;
+}
+
+.mat-accordion .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-indicator {
+    height: 20px !important;
+}
+
+.convert-btn{
+    transform: translate(12px, -5px);
+}
+.analyse-btn{
+    margin-left: 12px;
+}
+.analyse-container{
+    transform: translate(0px, 10px);
+}

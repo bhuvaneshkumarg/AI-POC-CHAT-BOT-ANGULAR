@@ -1,0 +1,121 @@
+<!--<div class="mat-dialog-container">-->
+<!--<mat-form-field class="text-sm fuse-mat-no-subscript w-full mr-6 mb-10">-->
+<!--    <mat-label>Enter Your UserName</mat-label>-->
+<!--    <input matInput placeholder="UserName" [(ngModel)]="username" required />-->
+<!--</mat-form-field>-->
+<!--<mat-form-field class="text-sm fuse-mat-no-subscript w-full mr-6 mb-10">-->
+<!--    <mat-label>Enter Your Password</mat-label>-->
+<!--    <input matInput placeholder="Password"  [(ngModel)]="password" required />-->
+<!--</mat-form-field>-->
+
+<!--<button-->
+<!--        class="fuse-mat-button-large mt-3"-->
+<!--        mat-flat-button-->
+<!--        [color]="'primary'"-->
+<!--        (click)="onSubmit()"-->
+<!--&gt;-->
+<!--   Continue-->
+<!--</button>-->
+<!--</div>-->
+
+
+<!--<title>Git Credential Manager</title>-->
+<!--<body class="flex items-center justify-center ">-->
+<!--<div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg">-->
+<!--    <div class="flex items-center mb-6">-->
+<!--        <h1 class="text-xl font-semibold text-gray-800">Git Credential Manager</h1>-->
+<!--    </div>-->
+<!--    <p class="mb-4 text-sm text-gray-600">Enter your credentials for <span class="font-medium">'https://tfs.stgit.com/'</span></p>-->
+<!--    <form>-->
+<!--        <div class="mb-4">-->
+<!--            <label for="username" class="block mb-2 text-sm font-medium text-gray-700">Username</label>-->
+<!--            <input type="text" id="username" class="w-full px-4 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Username" required>-->
+<!--        </div>-->
+<!--        <div class="mb-6">-->
+<!--            <label for="password" class="block mb-2 text-sm font-medium text-gray-700">Password</label>-->
+<!--            <input type="password" id="password" class="w-full px-4 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Password" required>-->
+<!--        </div>-->
+<!--        <button type="submit" class="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1">-->
+<!--            Continue-->
+<!--        </button>-->
+<!--    </form>-->
+<!--</div>-->
+
+
+<title>Git Credential Manager</title>
+<body class="flex items-center justify-center">
+<div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-lg relative">
+    <!-- Close Icon -->
+    <button
+            class="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+            (click)="onCancel()"
+    >
+        <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+        >
+            <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+            />
+        </svg>
+    </button>
+
+    <!-- Title -->
+    <div class="flex items-center mb-6">
+        <h1 class="text-xl font-semibold text-gray-800">Git Credential Manager</h1>
+    </div>
+
+    <!-- Information Text -->
+    <p class="mb-4 text-sm text-gray-600">
+        Enter your credentials for <span class="font-medium">'{{ url }}'</span>
+    </p>
+
+    <!-- Form -->
+    <form>
+        <div class="mb-4">
+            <label for="username" class="block mb-2 text-sm font-medium text-gray-700">Username</label>
+            <input
+                    id="username"
+                    class="w-full px-4 py-2 text-sm border rounded-md focus:outline-none focus:ring-2"
+                    [ngClass]="{'border-red-500 focus:ring-red-500': !username && usernameTouched}"
+                    (blur)="usernameTouched = true"
+                    placeholder="Username"
+                    [(ngModel)]="username"
+                    name="username"
+                    required
+            />
+        </div>
+
+        <div class="mb-6">
+            <label for="password" class="block mb-2 text-sm font-medium text-gray-700">Password</label>
+            <input
+                    id="password"
+                    type="password"
+                    class="w-full px-4 py-2 text-sm border rounded-md focus:outline-none focus:ring-2"
+                    [ngClass]="{'border-red-500 focus:ring-red-500': !password && passwordTouched}"
+                    (blur)="passwordTouched = true"
+                    placeholder="Password"
+                    [(ngModel)]="password"
+                    name="password"
+                    required
+            />
+        </div>
+
+        <button
+                type="button"
+                [disabled]="!username || !password"
+                class="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 disabled:opacity-50"
+                (click)="onSubmit()"
+        >
+            Continue
+        </button>
+    </form>
+</div>
+</body>
+

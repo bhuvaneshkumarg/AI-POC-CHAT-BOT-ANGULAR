@@ -1,0 +1,30 @@
+.error{
+    border-radius: 6px;
+    border-style: groove;
+    padding: 10px;
+    margin: 5px;
+  
+}
+.testerror{
+    color: red;
+    font-weight: 500;
+}
+.testsuccess{
+    color: green;
+    font-weight: 500;
+    font-size: large;
+}
+.items{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+.close{
+    justify-content: end;
+}
+.buttonclose{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+}

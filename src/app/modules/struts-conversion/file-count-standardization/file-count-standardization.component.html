@@ -1,0 +1,162 @@
+<!-- <div class="container sm:col-span-6 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden"> -->
+<div *ngIf="showContent" style="display: flex; align-items: center;justify-content: flex-end;">
+  <img style="width: 20px; height: 20px; cursor: pointer;" src="assets/icons/download.png"
+    (click)="downloadPDF()">&nbsp;
+  <p style="color: #3182CE; cursor: pointer;" (click)="downloadPDF()">Download Report</p>
+</div>
+
+<div class="bg-card m-4 rounded-2xl" style="padding: 20px 0;">
+  <div class="mt-3 mb-3 flex justify-center items-center">
+    <div class="flex flex-roe">
+      <img style="height: 32px;width: 32px;" src="assets/icons/gemini-icon.png">
+      <p style="padding-top: 8px;margin-right: 8px;">Generative AI : </p>
+
+    </div>
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="conversionAiMethod" (change)="onAiMethodChange()">
+      <mat-radio-button class="mx-3" value="vertexAi">Vertex AI</mat-radio-button>
+      <mat-radio-button class="mx-3" value="openAi">Open AI</mat-radio-button>
+      <mat-radio-button class="mx-3" value="azureAi">Azure AI</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="mt-10 mb-5 flex justify-center items-center gap-5">
+    <!-- SourceDatabase -->
+    <div class="md:w-1/4 pl-2">
+     <mat-form-field class="text-sm fuse-mat-no-subscript w-full mb-5">
+       <mat-label>Source Database</mat-label>
+       <mat-select [(ngModel)]="selectedSourceDatabase" (selectionChange)="onSourceDatabaseChange($event.value)" required>
+         <mat-option *ngFor="let dbType of databaseTypes" [value]="dbType.key">
+           {{ dbType.value }}
+         </mat-option>
+       </mat-select>
+     </mat-form-field>
+   </div>
+   <!-- TargetDatabase -->
+   <div class="md:w-1/4 pl-2">
+     <mat-form-field class="text-sm fuse-mat-no-subscript w-full mb-5">
+       <mat-label>Target Database</mat-label>
+       <mat-select [(ngModel)]="selectedTargetDatabase" (selectionChange)="onTargetDatabaseChange($event.value)" required>
+         <mat-option *ngFor="let dbType of databaseTypes" [value]="dbType.key">
+           {{ dbType.value }}
+         </mat-option>
+       </mat-select>
+     </mat-form-field>
+   </div>
+  </div>
+</div>
+
+<div style="width: 500px; margin: 0 auto;">
+  <app-progress-bar class="mt-10 mb-10" *ngIf="isProgressBarVisible$ | async"></app-progress-bar>
+</div>
+
+<div class="summary" *ngIf="showContent" id="original-summary">
+  <div class="text-lg font-medium tracking-tight leading-6 p-2 truncate header-text">Backend Analysis Summary</div>
+
+  <!-- spring-boot -->
+  <div class="container">
+    <div class="left-section">
+
+      <div class="progress-item" *ngFor="let stat of backendFileStats">
+        <div class="progress-title">
+          <span class="file-type">{{ stat.extension }}</span>
+          <span class="file-percentage">{{ stat.percentage }}%</span>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" [style.width.%]="stat.percentage"></div>
+        </div>
+        <div class="file-details">
+          <span>{{ stat.count }} files </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-section" *ngIf="backendFileStats.length > 0">
+      <!-- <h2>Struts Conversion Percentage</h2> -->
+      <div class="chart-container">
+        <div class="doughnut-chart" [ngStyle]="backendDoughnutStyle">
+          <div class="inner-circle"></div>
+        </div>
+        <ul class="conversion-details">
+          <li><span class="dot automatic"></span> Automatic Conversion - {{ automaticConversionPercentageBackend }}%
+          </li>
+          <li><span class="dot manual"></span> Manual Conversion - {{manualConversionPercentageBackend}}%</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <!-- Angular -->
+  <div class="text-lg font-medium tracking-tight leading-6 p-2 truncate">Frontend Analysis Summary</div>
+  <div class="container ng-container">
+    <div class="left-section-two">
+      <div class="progress-item" *ngFor="let stat of frontendFileStats">
+        <div class="progress-title" *ngIf="stat.count > 0">
+          <span class="file-type">{{ stat.extension }}</span>
+          <span class="file-percentage">{{ stat.percentage }}%</span>
+        </div>
+        <div class="progress-bar-container" *ngIf="stat.count > 0">
+          <div class="progress-bar" [style.width.%]="stat.percentage"></div>
+        </div>
+        <div class="file-details" *ngIf="stat.count > 0">
+          <span>{{ stat.count }} files</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-section" *ngIf="frontendFileStats.length > 0">
+      <!-- <h2>Struts Conversion Percentage</h2> -->
+      <div class="chart-container">
+        <div class="doughnut-chart" [ngStyle]="frontendDoughnutStyle">
+          <div class="inner-circle"></div>
+        </div>
+        <ul class="conversion-details">
+          <li><span class="dot automatic"></span> Automatic Conversion - {{ automaticConversionPercentageFrontend }}%
+          </li>
+          <li><span class="dot manual"></span> Manual Conversion - {{manualConversionPercentageFrontend}}%</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- <mat-spinner *ngIf="loading" diameter="50"></mat-spinner> -->
+  <!-- 
+  </div> -->
+
+  <!-- Your other content goes here -->
+
+</div>
+
+<!-- <div> -->
+  <div class="mt-3 mb-3 flex justify-center items-center gap-4" 
+  [ngStyle]="{ 'cursor': processInProgress ? 'not-allowed' : 'pointer'}" 
+  style="width: fit-content; margin: 0 auto;">
+
+  <button *ngIf="!(isProgressBarVisible$ | async)" 
+    class="fuse-mat-button-large mt-3 mx-2" 
+    mat-stroked-button 
+    (click)="onReviewClick()" 
+    [color]="'primary'">
+    Review
+  </button>
+
+  <button *ngIf="!(isProgressBarVisible$ | async)" 
+    [ngStyle]="{ 'pointer-events': processInProgress ? 'none' : 'auto'}" 
+    class="fuse-mat-button-large mt-3 mx-2" 
+    mat-flat-button 
+    [color]="'primary'" 
+    (click)="analyze()"
+    [disabled]="!selectedTargetDatabase || !selectedSourceDatabase || isAnalyzeDisabled">
+    Analyze
+  </button>
+
+  <button *ngIf="showContent" 
+    class="fuse-mat-button-large mt-3 mx-2" 
+    mat-flat-button  
+    (click)="onConvertClick()"  
+    [color]="'primary'">
+    Convert
+  </button>
+
+</div>
+
+<!-- </div> -->

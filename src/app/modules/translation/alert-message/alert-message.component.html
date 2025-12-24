@@ -1,0 +1,46 @@
+<div>
+    <div *ngIf="!Response.status" class="error">
+      <h1></h1>
+      <div class="items">
+        <mat-icon
+          style="margin-right: 10px"
+          class="icon-size-1 text-red-400"
+          [svgIcon]="'heroicons_solid:x-circle'"
+        >
+        </mat-icon>
+        <h1 class="testerror">{{ Response.message }}</h1>
+      </div>
+      <div  class="buttonclose">
+        <button [color]="'primary'" mat-button mat-dialog-close>Close</button>
+      </div>
+    </div>
+    <div *ngIf="Response.status && Response.configName !=='OK' " class="error">
+      <div class="items">
+        <mat-icon
+          style="margin-right: 10px"
+          class="icon-size-1 text-red-400"
+          [svgIcon]="'heroicons_solid:check-circle'"
+        >
+        </mat-icon>
+        <h1 class="testerror">{{ Response.configName }}</h1>
+      </div>
+      <div  class="buttonclose" >
+        <button [color]="'primary'" mat-button mat-dialog-close>Close</button>
+      </div>
+    </div>
+    <div *ngIf="Response.status && Response.configName==='OK' " class="error">
+      <div class="items">
+        <mat-icon
+          style="margin-right: 10px"
+          class="icon-size-1 text-green-400"
+          [svgIcon]="'heroicons_solid:check-circle'"
+        >
+        </mat-icon>
+        <h1 class="testsuccess">{{ Response.message }}</h1>
+      </div>
+      <div  class="buttonclose" >
+        <button [color]="'primary'" mat-button mat-dialog-close>Close</button>
+      </div>
+    </div>
+</div>
+  

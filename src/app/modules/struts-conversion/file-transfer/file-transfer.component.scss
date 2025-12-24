@@ -1,0 +1,19 @@
+.tree {
+  max-height: 300px;
+  overflow-y: auto; /* Scrollable tree */
+  //border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.tree::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tree::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.tree::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}

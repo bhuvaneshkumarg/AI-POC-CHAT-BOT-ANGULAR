@@ -1,0 +1,367 @@
+<!-- Open Positions Summary -->
+<div class="w-full">
+    <div class="header p-4" style="background-color: #0f172a;">
+  
+      <h1 style="color: #eceee8; font-weight: bold; font-size: 20px;font-style: normal;">Conversion Dashboard</h1>
+  
+    </div>
+  
+    <!-- <div class="flex flex-col flex-auto bg-card shadow m-4 rounded-2xl overflow-hidden" *ngIf="!startProcess">
+      <div class="flex flex-col">
+        <div class="md:mr-9 md:ml-9 mt-5 mb-5 text-lg font-extrabold tracking-tight leading-6 truncate"> Welcome to Struts
+          Modernization
+          Accelerator !</div>
+      </div>
+     <app-conversion-home (showConversionDashboard)="showConversion($event)"></app-conversion-home>
+    </div> -->
+  
+    <div class="flex flex-col flex-auto bg-card shadow m-4 rounded-2xl overflow-hidden">
+      <mat-horizontal-stepper #stepper linear [ngClass]="{'hide-stepper': false}">
+  
+        <!-- Get Started -->
+  
+        <!--            <mat-step label="Source"  [stepControl]="valid">-->
+        <!--                <div class="flex flex-col flex-auto bg-card shadow m-4 rounded-2xl overflow-hidden">-->
+        <!--                    <div class="flex flex-col">-->
+        <!--                        <div class="m-4 text-lg font-extrabold tracking-tight leading-6 truncate"> Welcome to Struts Modernization Accelerator !</div>-->
+        <!--                    </div>-->
+        <!--                    <div class="mt-1 mb-1 md:flex flex-col  md:mr-5 md:ml-5">-->
+        <!--                        <div class="mt-3 mb-3 md:flex flex-row   md:mr-5 md:ml-5">-->
+  
+        <!--                            <p>dolor sit amet, consectetuer adipiscing elit Aenean commodo ligula eget dolor.-->
+        <!--                                Aenean massa. Cum soclis natoque penatibus et magnis dis parturient montes,-->
+        <!--                                nascetur ridiculus mus. Donec quam felis,</p>-->
+  
+        <!--                        </div>-->
+        <!--                        <div class="mt-3 mb-3 flex justify-center items-center">-->
+        <!--                            <button-->
+        <!--                                    class="fuse-mat-button-large mt-3"-->
+        <!--                                    mat-flat-button-->
+        <!--                                    [color]="'primary'"-->
+  
+        <!--                                    matStepperNext-->
+        <!--                            >-->
+        <!--                                Get Started-->
+        <!--                            </button>-->
+        <!--                        </div>-->
+  
+  
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </mat-step >-->
+  
+        <!-- Step 1: Source and Destination -->
+        <mat-step label="Initiate" [stepControl]="valid1" [editable]="false">
+          <!-- <ng-template matStepIcon let-state="state">
+            <mat-icon *ngIf="state === 'completed'">check_circle</mat-icon>
+          </ng-template> -->
+        
+           <ng-template matStepIcon let-state="state">
+            <mat-icon *ngIf="state === 'completed'">check_circle</mat-icon>
+          </ng-template>
+        
+          <!-- Custom icon with a context variable. -->
+          <ng-template matStepperIcon="number" let-index="index">
+            <div class="circle"></div>
+          </ng-template>
+          <div class="flex flex-col flex-auto m-4 overflow-hidden">
+            <div class="flex flex-col">
+              <div class="m-4 text-lg font-extrabold tracking-tight leading-6 truncate"> Source Code Analysis</div>
+            </div>
+            <div class="mt-1 md:flex flex-col  md:mr-5 md:ml-5 text-center">
+  
+              <div class="mt-3 md:flex md:flex-row">
+                <!-- Left Column -->
+                <div class="md:w-3/4 pr-2">
+                  <mat-form-field class="text-sm fuse-mat-no-subscript w-full mb-5">
+                    <mat-label>Git Source Path</mat-label>
+                    <input matInput placeholder="Paste the GitHub Source URL" [(ngModel)]="gitUrl" required
+                      [class.invalid]="gitUrl && !isValidUrl(gitUrl)" />
+                  </mat-form-field>
+                </div>
+  
+                <!-- Right Column -->
+                <div class="md:w-1/4 pl-2">
+                  <mat-form-field class="text-sm fuse-mat-no-subscript w-full mb-5">
+                    <mat-label>Branch</mat-label>
+                    <input matInput placeholder="Enter the branch name" [(ngModel)]="branchName"  (keypress)="preventSpace($event)" required />
+                  </mat-form-field>
+                </div>
+              </div>
+              <!--                        <div class="mt-3 md:flex flex-row  md:mr-5 md:ml-5 text-center">-->
+  
+  
+              <!--                        </div>-->
+              <!--                        [disabled]="!sourcePath"-->
+  
+              <!-- <div class="mt-3 mb-3 flex justify-center items-center">
+                <div class = "flex flex-roe">
+                    <img style="height: 32px;width: 32px;" src="assets/icons/gemini-icon.png">
+                    <p style="padding-top: 8px;margin-right: 8px;">Generative AI  : </p>
+  
+                </div>    
+                <mat-radio-group aria-label="Select an option" [(ngModel)]="conversionAiMethod">
+                  <mat-radio-button class ="mx-3" value="vertexAi">Vertex AI</mat-radio-button>
+                  <mat-radio-button class ="mx-3" value="openAi">Open AI</mat-radio-button>
+                  <mat-radio-button class ="mx-3" value="azureAi">Azure AI</mat-radio-button>
+                </mat-radio-group>
+             </div>                         -->
+             
+              <div class="mt-3 mb-3 flex justify-center items-center">
+                <button cl ass="fuse-mat-button-large mt-3" mat-flat-button [color]="'primary'"
+                  [disabled]="!gitUrl || !isValidUrl(gitUrl) || !branchName" (click)="onFolderSubmit(stepper)">
+                  Checkout Source Code
+                </button>
+              </div>
+  
+  
+            </div>
+          </div>
+        </mat-step>
+        <!-- Step 2: AI Method -->
+        <mat-step label="Review" [stepControl]="valid2" [editable]="false">
+          <app-file-standardization *ngIf="sourcePath && !validationFailed"
+            (validationResult)="handleValidationResult($event)" [fileData]="fileData" [listData]="listData"
+            [sourcePath]="sourcePathValue">
+          </app-file-standardization>
+  
+          <app-file-transfer #fileTransfer [clonedPath]=clonedPath [sourcePath]="sourcePath" *ngIf="validationFailed"
+            [folderStructure]="folderStructure">
+          </app-file-transfer>
+  
+          <div class="mt-3 mb-3 flex justify-center items-center">
+            <button class="fuse-mat-button-large mt-3" mat-flat-button [color]="'primary'"
+              (click)="onAnalyseReport(fileTransfer,stepper)">
+              Next
+            </button>
+          </div>
+        </mat-step>
+  
+  
+        <!-- Add other steps here -->
+        <mat-step label="Analyze" [editable]="false">
+  
+          <app-file-count-standardization *ngIf="sourcePath && countShow"
+            [sourcePath]="sourcePath" [conversionAiMethod]="conversionAiMethod" (passToParent)="childEvent($event)"></app-file-count-standardization>
+          <div class="mt-3 mb-3 flex justify-center items-center" *ngIf="showDestinationDirButton">
+            <button class="fuse-mat-button-large mt-3" mat-flat-button matStepperNext [color]="'primary'">
+              Setup Destination Directory
+            </button>
+          </div>
+        </mat-step>
+  
+        <!-- Step 1: Source and Destination -->
+        <mat-step label="Convert" [stepControl]="valid1" [editable]="false">
+          <app-source-code-conversion-page [sourcePath]="sourcePath" [conversionAiMethod]="conversionAiMethod"></app-source-code-conversion-page>
+          <!-- <div class="flex flex-col flex-auto bg-card shadow m-4 rounded-2xl overflow-hidden">
+                      <div class="flex flex-col">
+                          <div class="m-4 text-lg font-extrabold tracking-tight leading-6 truncate"> SetUp Destination Directory - Springboot </div>
+                      </div>
+                      <div class="mt-1 md:flex flex-col  md:mr-5 md:ml-5 text-center">
+                          <div class="mt-3 md:flex flex-row   md:mr-5 md:ml-5 text-center">
+  
+                            <mat-form-field class="text-sm fuse-mat-no-subscript w-full mr-2 mb-5">
+                                <mat-label>Git Destination Path</mat-label>
+                                <input matInput placeholder="Paste the GitHub Destination URL"      [(ngModel)]="gitDestinationUrl" required
+                                       [class.invalid]="gitDestinationUrl && !isValidUrl(gitDestinationUrl)"
+                                />
+                            </mat-form-field>
+  
+                        </div>
+                        <div class="mt-3 mb-3 flex justify-center items-center">
+                            <button
+                                    class="fuse-mat-button-large mt-3"
+                                    mat-flat-button
+                                    [color]="'primary'"
+  
+                                    [disabled]="!gitUrl || !isValidUrl(gitUrl)"
+                                    (click)="onPushSubmit(stepper)"
+  
+  
+                            >
+                                Start Conversion
+                            </button>
+                        </div>
+  
+  
+                      </div>
+                  </div> -->
+        </mat-step>
+  
+        <!-- <mat-step  label="Conversion">
+             
+                 <app-source-code-conversion-page [sourcePath]="sourcePath" *ngIf="showConversionPage"></app-source-code-conversion-page>
+              </mat-step> -->
+        <!-- <mat-step  label="Final" >
+                  <div>Step 5 content</div>
+              </mat-step> -->
+      </mat-horizontal-stepper>
+  
+    </div>
+  
+  
+  
+  
+  
+    <div class="flex flex-row flex-auto  m-4 rounded-2xl overflow-hidden" *ngIf="false">
+  
+      <div class="flex flex-col flex-auto bg-card shadow m-4 rounded-2xl overflow-hidden">
+        <div class="flex flex-col">
+          <div class="m-4 text-lg font-extrabold tracking-tight leading-6 truncate"> Struts Java To Spring Boot Conversion
+          </div>
+        </div>
+        <form #mgFor [formGroup]="createForm" (ngSubmit)="runSpringBoot()">
+          <!-- Name -->
+          <div class="button-container mb-2 text-center">
+            <button class="mr-2 " mat-flat-button [color]="'primary'" [disabled]="showRunButtonSpringBoot ">
+              Run
+              <mat-icon matPrefix class="sm:flex icon-size-4 ml-4"
+                [svgIcon]="'heroicons_outline:arrow-circle-right'"></mat-icon>
+            </button>
+  
+            <button *ngIf="false" mat-flat-button [color]="'primary'"
+              [disabled]="createForm.invalid || showRunButtonSpringBoot ">
+              Re run <mat-icon matPrefix class="sm:flex icon-size-4 ml-4"
+                [svgIcon]="'heroicons_outline:arrow-circle-right'"></mat-icon>
+            </button>
+  
+          </div>
+        </form>
+        <div class="overflow-x-auto shadow-md rounded-lg height-60 bg-white m-3">
+          <h1 class="sticky top-0 left-0 right-0 text-white text-center hover:uppercase p-3 bg-[#1e293b]">
+            <strong> Spring Boot Process Summary</strong>
+          </h1>
+          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase">
+              <tr class="text-center">
+                <th scope="col" class="bg-gray-50 sticky top-8 px-6 py-3">
+                  {{createNames.teradataProcessSummaryColumnsTask}}</th>
+                <th scope="col" class="bg-gray-50 sticky top-8 px-6 py-3">
+                  {{createNames.teradataIncrementalProcessSummaryColumnsStatus}}</th>
+                <th scope="col" class="bg-gray-50 sticky top-8 px-6 py-3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let progress of progressListSpring">
+                <tr class="text-center bg-white dark:bg-gray-800 dark:border-gray-700">
+                  <td class="px-6 py-4">{{progress}}</td>
+                  <td *ngIf="springBootProgess.status" class="px-6 py-4">
+                    {{progress}}
+                  </td>
+                  <td
+                    *ngIf="!springBootProgess.status && springBootProgess.message!='success' && springBootProgess.message!=null"
+                    class="px-6 py-4">
+                    Error
+                  </td>
+                  <!-- <td *ngIf="!springBootProgess.status && springBootProgess.message!=null && afterResponse<1 " class="px-6 py-4">
+                Error
+              </td> -->
+                  <td *ngIf="!springBootProgess.status && springBootProgess.message==null && !showProcessSummary"
+                    class="px-6 py-4">
+                    Not Started
+                  </td>
+                  <td *ngIf="showProcessSummary && springBootProgess.message==null && !springBootProgess.status"
+                    class="px-6 py-4">
+                    Inprogress
+                  </td>
+                  <td>
+                    <mat-icon *ngIf="springBootProgess.status" class="icon-size-1 text-green-400"
+                      [svgIcon]="'heroicons_solid:check-circle'">
+                    </mat-icon>
+                    <mat-icon *ngIf="!springBootProgess.status && springBootProgess.message==null && !showProcessSummary"
+                      class="icon-size-1 text-grey-400" [svgIcon]="'heroicons_solid:minus-circle'">
+                    </mat-icon>
+                    <mat-icon *ngIf="showProcessSummary && springBootProgess.message==null"
+                      class="icon-size-1 text-yellow-400" [svgIcon]="'heroicons_solid:clock'">
+                    </mat-icon>
+                    <mat-icon *ngIf="!springBootProgess.status && springBootProgess.message!=null"
+                      class="icon-size-1 text-red-400" [svgIcon]="'heroicons_solid:x-circle'">
+                    </mat-icon>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="flex flex-col flex-auto bg-card shadow m-4 rounded-2xl overflow-hidden">
+        <div class="flex flex-col">
+          <div class="m-4 text-lg font-extrabold tracking-tight leading-6 truncate"> Struts Java UI To Angular Conversion
+          </div>
+        </div>
+        <form #mgFor [formGroup]="createForm" (ngSubmit)="runAngular()">
+          <!-- Name -->
+          <div class="button-container mb-2 text-center">
+            <button class="mr-2 " mat-flat-button [color]="'primary'" [disabled]="showRunButtonAngular ">
+              Run
+              <mat-icon matPrefix class="sm:flex icon-size-4 ml-4"
+                [svgIcon]="'heroicons_outline:arrow-circle-right'"></mat-icon>
+            </button>
+  
+            <button *ngIf="false" mat-flat-button [color]="'primary'" [disabled]="createForm.invalid || showRunButton ">
+              Re run <mat-icon matPrefix class="sm:flex icon-size-4 ml-4"
+                [svgIcon]="'heroicons_outline:arrow-circle-right'"></mat-icon>
+            </button>
+  
+          </div>
+        </form>
+        <div class="overflow-x-auto shadow-md rounded-lg height-60 bg-white m-3">
+          <h1 class="sticky top-0 left-0 right-0 text-white text-center hover:uppercase p-3 bg-[#1e293b]">
+            <strong>Angular Process Summary</strong>
+          </h1>
+          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase">
+              <tr class="text-center">
+                <th scope="col" class="bg-gray-50 sticky top-8 px-6 py-3">
+                  {{createNames.teradataProcessSummaryColumnsTask}}</th>
+                <th scope="col" class="bg-gray-50 sticky top-8 px-6 py-3">
+                  {{createNames.teradataIncrementalProcessSummaryColumnsStatus}}</th>
+                <th scope="col" class="bg-gray-50 sticky top-8 px-6 py-3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let progress of progressListAngular">
+                <tr class="text-center bg-white dark:bg-gray-800 dark:border-gray-700">
+                  <td class="px-6 py-4">{{progress}}</td>
+                  <td *ngIf="angularProgess.status" class="px-6 py-4">
+                    {{progress}}
+                  </td>
+                  <td *ngIf="!angularProgess.status && angularProgess.message!='success' && angularProgess.message!=null"
+                    class="px-6 py-4">
+                    Error
+                  </td>
+                  <!-- <td *ngIf="!angularProgess.status && angularProgess.message!=null && afterResponse<1 " class="px-6 py-4">
+                Error
+              </td> -->
+                  <td *ngIf="!angularProgess.status && angularProgess.message==null && !showProcessSummary"
+                    class="px-6 py-4">
+                    Not Started
+                  </td>
+                  <td *ngIf="showProcessSummary && angularProgess.message==null && !angularProgess.status"
+                    class="px-6 py-4">
+                    Inprogress
+                  </td>
+                  <td>
+                    <mat-icon *ngIf="angularProgess.status" class="icon-size-1 text-green-400"
+                      [svgIcon]="'heroicons_solid:check-circle'">
+                    </mat-icon>
+                    <mat-icon *ngIf="!angularProgess.status && angularProgess.message==null && !showProcessSummary"
+                      class="icon-size-1 text-grey-400" [svgIcon]="'heroicons_solid:minus-circle'">
+                    </mat-icon>
+                    <mat-icon *ngIf="showProcessSummary && angularProgess.message==null"
+                      class="icon-size-1 text-yellow-400" [svgIcon]="'heroicons_solid:clock'">
+                    </mat-icon>
+                    <mat-icon *ngIf="!angularProgess.status && angularProgess.message!=null"
+                      class="icon-size-1 text-red-400" [svgIcon]="'heroicons_solid:x-circle'">
+                    </mat-icon>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+  
+    </div>
+  </div>

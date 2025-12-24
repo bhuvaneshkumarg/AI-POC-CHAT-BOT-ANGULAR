@@ -1,0 +1,108 @@
+
+
+.container {
+  display: flex;
+  height: 100vh; /* Full viewport height */
+
+  /* Left Panel */
+  .left-panel {
+    width: 250px; /* Adjusted for tighter space */
+    background-color: #eceff4; /* Dark background color */
+    color: #eceff4; /* Light text color */
+    padding: 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for separation */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: auto; /* Enable vertical scrolling */
+    border-right: 1px solid #4c566a; /* Subtle border for separation */
+
+    /* Scrollbar Styling */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #4c566a; /* Thumb color */
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #5e81ac; /* Thumb color on hover */
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #2e3440; /* Match left panel background color */
+    }
+  }
+
+  /* Right Panel */
+  .right-panel {
+    flex-grow: 1; /* Take remaining space */
+    padding: 1rem;
+    background-color: #eceff4; /* Light background for contrast */
+    color: #2e3440; /* Dark text color */
+  }
+
+  /* Tree Node Styling */
+  .mat-tree-node {
+    display: flex;
+    align-items: center;
+    padding: 1px 0; /* Reduced gap between items even further */
+    font-size: 12px; /* Further reduced font size for method names */
+    line-height: 16px; /* Further reduced line height for compactness */
+    height: 10px;
+    .mat-icon {
+      margin-right: 4px; /* Tighter space between icon and text */
+      font-size: 14px; /* Further reduced icon size */
+    }
+
+    &.mat-folder {
+      font-weight: bold;
+      .mat-icon {
+        color: #f6d32d; /* Yellow color for folder icon */
+      }
+    }
+
+    &.mat-file {
+      .mat-icon {
+        color: #81a1c1; /* Light blue for file icons */
+      }
+    }
+
+    &:hover {
+      background-color: #4c566a; /* Subtle hover effect */
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+
+  /* Indentation for Tree Levels */
+  
+  [matTreeNodePadding] {
+    padding-left: calc(12px * var(--mat-tree-node-level)); 
+  }
+
+  /* Scrollbar Styling */
+  .left-panel::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .left-panel::-webkit-scrollbar-thumb {
+    background-color: #4c566a; /* Thumb color */
+    border-radius: 4px;
+  }
+
+  .left-panel::-webkit-scrollbar-thumb:hover {
+    background-color: #5e81ac; /* Thumb color on hover */
+  }
+
+  .left-panel::-webkit-scrollbar-track {
+    background-color: #2e3440; /* Track color */
+  }
+  mat-tree {
+    background-color: #eceff4 !important; /* Ensure mat-tree matches the left-panel background */
+  }
+
+  mat-tree-node {
+    background-color: #eceff4 !important; /* Ensure individual nodes match the left-panel background */
+  }
+}

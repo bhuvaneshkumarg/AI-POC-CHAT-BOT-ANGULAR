@@ -1,0 +1,112 @@
+
+<div class="w-full">
+
+
+<!--        <div class="header p-4" style="background-color: #0f172a;">-->
+<!--            <h1 style="color: #eceee8; font-weight: bold; font-size: 20px; font-style: normal;">File Upload</h1>-->
+<!--            <input type="file" webkitdirectory (change)="onFolderUpload($event)" />-->
+<!--        </div>-->
+    <div class="header p-4" style="background-color: #0f172a;">
+        <h1 style="color: #eceee8; font-weight: bold; font-size: 20px; font-style: normal;">File Upload</h1>
+<!--        <input type="text" [(ngModel)]="folderPath" placeholder="Enter folder path" />-->
+<!--        <button (click)="onFolderPathSubmit()">Load Folder</button>-->
+
+        <mat-form-field class="w-full">
+            <mat-label>File Upload</mat-label>
+            <input
+                    id="email"
+                    matInput
+                    [(ngModel)]="folderPath">
+        </mat-form-field>
+
+        <!-- Submit button -->
+        <button
+                class="fuse-mat-button-large mt-3"
+                mat-flat-button
+                [color]="'primary'"
+                [disabled]="!(folderPath.length>0)"
+                (click)="onFolderPathSubmit()">
+            Upload
+        </button>
+    </div>
+    <div class="container">
+        <!-- Left Panel with Tree -->
+        <div class="left-panel">
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                <!-- Default Node -->
+                <mat-tree-node *matTreeNodeDef="let node"  matTreeNodeToggle>
+                    <div class="mat-tree-node" [ngClass]="{'mat-file': node.type === 'file', 'mat-folder': node.type === 'folder'}">
+                        <mat-icon class="mat-icon" *ngIf="node.type === 'folder'">folder</mat-icon>
+                        <mat-icon class="mat-icon" *ngIf="node.type === 'file'">insert_drive_file</mat-icon>
+                        {{ node.name }}
+                    </div>
+                </mat-tree-node>
+
+                <!-- Node with Children -->
+                <mat-tree-node *matTreeNodeDef="let node; when: hasChild"  matTreeNodeToggle>
+                    <div class="mat-tree-node" [ngClass]="{'mat-file': node.type === 'file', 'mat-folder': node.type === 'folder'}">
+                        <mat-icon class="mat-icon" *ngIf="treeControl.isExpanded(node)">expand_more</mat-icon>
+                        <mat-icon class="mat-icon" *ngIf="!treeControl.isExpanded(node)">chevron_right</mat-icon>
+                        <mat-icon class="mat-icon" *ngIf="node.type === 'folder'">folder</mat-icon>
+                        <mat-icon class="mat-icon" *ngIf="node.type === 'file'">insert_drive_file</mat-icon>
+                        {{ node.name }}
+                    </div>
+                </mat-tree-node>
+            </mat-tree>
+        </div>
+
+        <!-- Right Panel (Optional) -->
+        <div class="right-panel">
+            <button class="mr-2 mb-4" mat-flat-button [color]="'primary'" (click)="startStream()">
+                Trigger
+            </button>
+
+            <div class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+                <div class="p-6">
+                    <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">Method Status</div>
+                </div>
+
+                <div class="overflow-x-auto mx-6">
+                    <table class="w-full bg-transparent" mat-table [dataSource]="methods">
+                        <!-- Method Name Column -->
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef>Method</th>
+                            <td mat-cell *matCellDef="let method">
+                                <span class="pr-6 font-medium text-sm text-secondary whitespace-nowrap">{{ method.name }}</span>
+                            </td>
+                        </ng-container>
+
+                        <!-- Status Column -->
+                        <ng-container matColumnDef="status">
+                            <th mat-header-cell *matHeaderCellDef>Status</th>
+                            <td mat-cell *matCellDef="let method">
+            <span
+                    class="inline-flex items-center font-bold text-xs px-2.5 py-0.5 rounded-full tracking-wide uppercase"
+                    [ngClass]="{
+                'bg-red-200 text-red-800 dark:bg-red-600 dark:text-red-50': method.status === 'Pending',
+                'bg-green-200 text-green-800 dark:bg-green-600 dark:text-green-50': method.status === 'Completed',
+                'bg-yellow-200 text-yellow-800 dark:bg-yellow-600 dark:text-yellow-50': method.status === 'In Progress'
+              }">
+              <span class="leading-relaxed whitespace-nowrap">{{ method.status }}</span>
+            </span>
+                            </td>
+                        </ng-container>
+
+                        <!-- Footer -->
+                        <ng-container matColumnDef="footer">
+                            <td mat-footer-cell *matFooterCellDef colspan="2">
+<!--                                <button mat-stroked-button>See All Methods</button>-->
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        <tr mat-footer-row *matFooterRowDef="['footer']"></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

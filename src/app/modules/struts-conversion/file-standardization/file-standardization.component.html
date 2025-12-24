@@ -1,0 +1,52 @@
+<div class="container" style="padding-top: 10px; margin: 0;">
+    <div *ngIf="folderView == 'tree'" class="tree-table" style="color: #1E293B; padding: 10px;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="text-align: left; padding: 8px; border-bottom: 2px solid #d1d5db;">Name</th>
+                    <th style="text-align: left; padding: 8px; border-bottom: 2px solid #d1d5db; width: 300px;">Type
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" style="padding: 0;">
+                        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                            <!-- Default Node -->
+                            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding matTreeNodePaddingIndent="20"
+                                matTreeNodeToggle (click)="onFileClick(node)">
+                                <div class="mat-tree-node"
+                                    style="display: flex; align-items: center; border-bottom: 1px solid #e5e7eb; padding: 5px 0;"
+                                    [ngClass]="{'mat-file': node.type === 'file', 'mat-folder': node.type === 'folder'}">
+                                    <mat-icon class="mat-icon" *ngIf="node.type === 'folder'">folder</mat-icon>
+                                    <mat-icon class="mat-icon" *ngIf="node.type === 'file'">insert_drive_file</mat-icon>
+                                    <span class="tree-column" style="flex-grow: 1;">{{ node.name }}</span>
+                                    <span class="tree-column" style="width: 300px; flex-shrink: 0;">{{ getFileType(node)
+                                        }}</span>
+                                </div>
+                            </mat-tree-node>
+
+                            <!-- Node with Children -->
+                            <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding
+                                matTreeNodePaddingIndent="20" matTreeNodeToggle>
+                                <div class="mat-tree-node"
+                                    style="display: flex; align-items: center; border-bottom: 1px solid #e5e7eb; padding: 5px 0;"
+                                    [ngClass]="{'mat-file': node.type === 'file', 'mat-folder': node.type === 'folder'}">
+                                    <mat-icon class="mat-icon"
+                                        *ngIf="treeControl.isExpanded(node)">expand_more</mat-icon>
+                                    <mat-icon class="mat-icon"
+                                        *ngIf="!treeControl.isExpanded(node)">chevron_right</mat-icon>
+                                    <mat-icon class="mat-icon" *ngIf="node.type === 'folder'">folder</mat-icon>
+                                    <mat-icon class="mat-icon" *ngIf="node.type === 'file'">insert_drive_file</mat-icon>
+                                    <span class="tree-column" style="flex-grow: 1;">{{ node.name }}</span>
+                                    <span class="tree-column" style="width: 300px; flex-shrink: 0;">{{ getFileType(node)
+                                        }}</span>
+                                </div>
+                            </mat-tree-node>
+                        </mat-tree>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

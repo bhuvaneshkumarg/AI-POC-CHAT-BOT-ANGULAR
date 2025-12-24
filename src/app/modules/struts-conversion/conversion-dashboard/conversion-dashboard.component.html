@@ -1,0 +1,61 @@
+<div class="chat-container">
+<!--<div *ngIf="hasBotResponse()" class="disclaimer flashing-text">-->
+<!--  All the data used in this demo is Mockup data-->
+<!--</div>-->
+
+<!--<div *ngIf="hasBotResponse()" style="text-align: right; width: 100%; margin-bottom: 10px;">-->
+<!--  <button mat-button color="primary" (click)="downloadChatAsPDF()">Download Chat as PDF</button>-->
+<!--</div>-->
+
+  <div class="chat-window">
+    <div *ngFor="let message of msg; let i = index" class="message" [ngClass]="getMessageClass(message)">
+      <div class="message" [ngClass]="getMessageClass(message)">
+      <div [innerHTML]="message.content"></div>
+    
+      <div class="message-image" *ngIf="message.imageBase64">
+        <img
+          [src]="'data:image/png;base64,' + message.imageBase64"
+          class="clickable-image"
+          (click)="openImagePopup(i)" />
+      </div>
+    </div>
+    </div>
+    
+    <div *ngIf="zoomedImageIndex !== null" class="image-popup" (click)="closeImagePopup()">
+      <div class="popup-content" (click)="$event.stopPropagation()" (wheel)="onImageWheel($event)">
+        <button class="close-btn" *ngIf="zoomLevel === 1" (click)="closeImagePopup()">X</button>
+    
+        <img [src]="'data:image/png;base64,' + msg[zoomedImageIndex].imageBase64"
+             class="popup-image"
+             [style.transform]="'scale(' + zoomLevel + ')'" />
+      </div>
+    </div>
+    
+    
+  </div>
+
+  <div class="chat-input-container">
+    <textarea 
+      class="chat-input" 
+      [(ngModel)]="userMessage" 
+      placeholder="Type a message..." 
+      (keydown.enter)="!isLoading && submitResult(); $event.preventDefault()"
+      [disabled]="isLoading"
+      rows="1">
+    </textarea>
+
+    <mat-progress-spinner *ngIf="isLoading" 
+                          mode="indeterminate" 
+                          diameter="30" 
+                          color="primary">
+    </mat-progress-spinner>
+
+    <button mat-icon-button 
+            class="send-icon" 
+            aria-label="Send message" 
+            [disabled]="isLoading"
+            (click)="submitResult()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+</div>
